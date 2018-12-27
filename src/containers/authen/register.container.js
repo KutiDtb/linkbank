@@ -396,6 +396,9 @@ class RegisterContainer extends PureComponent {
         if (!Helper.checkValidString(this.state.phone)) {
             this.base.showErrorAlert('Vui lòng nhập số điện thoại')
             return
+        } else if (Helper.checkPhoneVN(this.state.phone) !== 1){
+            this.base.showErrorAlert(Localization('ERR_APP_PHONE_INVALID'))
+            return
         }
         if (!Helper.checkValidString(this.state.name)) {
             this.base.showErrorAlert('Vui lòng nhập tên đăng nhập')

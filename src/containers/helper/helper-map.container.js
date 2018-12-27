@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux'
 import BaseContainer from '../home/base.container'
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 
 const styles = StyleSheet.create({
     container: {
@@ -32,6 +32,15 @@ const styles = StyleSheet.create({
 const DELTA_LAT = 0.01
 const DELTA_LONG = 0.01
 
+var markers = [
+    {
+        latitude: 10.763240,
+        longitude: 106.682182,
+        title: 'Foo Place',
+        subtitle: '1234 Foo Drive'
+    }
+];
+
 class HelperMapContainer extends PureComponent {
     constructor(props) {
         super(props);
@@ -46,7 +55,18 @@ class HelperMapContainer extends PureComponent {
             markerPosition: {
                 latitude: 0,
                 longitude: 0,
-            }
+            },
+            markers: [
+                {
+                    key: '1',
+                    latlng: {
+                        latitude: 10.763240,
+                        longitude: 106.682182,
+                    },
+                    title: 'Foo Place',
+                    description: '1234 Foo Drive'
+                }
+            ]
         }
     }
 
@@ -93,10 +113,14 @@ class HelperMapContainer extends PureComponent {
                         longitudeDelta: 0.01,
                     }}
                 >
-                    {/* <Marker
-                        coordinate={this.state.markerPosition}
-                        title={'title'}
-                        description={'description'} /> */}
+                    {this.state.markers.map(marker => (
+                        <Marker
+                            key={marker.key}
+                            coordinate={marker.latlng}
+                            title={marker.title}
+                            description={marker.description}
+                        />
+                    ))}
 
                 </MapView >
             </BaseContainer >

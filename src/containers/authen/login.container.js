@@ -210,6 +210,9 @@ class LoginContainer extends PureComponent {
         if (!Helper.checkValidString(this.state.phone)) {
             this.base.showErrorAlert(msg.ERR_APP_INVALID_CONTACT_PHONE)
             return
+        } else if (Helper.checkPhoneVN(this.state.phone) !== 1){
+            this.base.showErrorAlert(Localization('ERR_APP_PHONE_INVALID'))
+            return
         }
         if (!Helper.checkValidString(this.state.pass)) {
             this.base.showErrorAlert(msg.ERR_APP_INVALID_LOGIN_PASS)
