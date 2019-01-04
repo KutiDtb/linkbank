@@ -51,6 +51,13 @@ export default class PasswordInputText extends React.Component {
                     activeLineWidth={0}
                     lineWidth={0}
                     tintColor={Colors.grey}
+                    maxLength={6}
+                    // selectTextOnFocus={true}
+                    // selection={{
+                    //     start: 0,
+                    //     end: 1,
+                    // }}
+                    // selectionColor={Colors.alive_BD3F32}
                  />
                 <Icon style={styles.icon}
                     name={this.state.icEye}

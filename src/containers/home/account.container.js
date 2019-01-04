@@ -4,7 +4,7 @@ import {
     Text,
     Image,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux'
 import BaseContainer from './base.container'
@@ -267,7 +267,7 @@ class AccountContainer extends PureComponent {
     }
 
     actionBack = () => {
-        this.props.navigation.goBack()
+        console.log('actionBack Account')
     }
     baseRef = (obj) => this.base = obj
     render() {
@@ -275,11 +275,10 @@ class AccountContainer extends PureComponent {
             <BaseContainer
                 currentScreen={'Account'}
                 ref={this.baseRef}
-                onBackHandler={this.actionBack}
                 showHeader={true}
                 titleHeader={Localization('taikhoan')}
-                showHeaderNext={false}
-                actionHeaderBack={this.actionBack}
+                // showHeaderNext={false}
+                // actionHeaderBack={this.actionBack}
                 ownStyle={{
                     flex: 1,
                     backgroundColor: Colors.whiteTwo,
@@ -334,7 +333,6 @@ class AccountContainer extends PureComponent {
                         textStyle={AppStyle.Title_Center_Black}
                     />
                 </View>
-
             </BaseContainer>
         )
     }

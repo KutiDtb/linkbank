@@ -474,6 +474,7 @@ class StockExchangeContainer extends PureComponent {
     }
 
     actionBack = () => {
+        console.log('actionBack StockExchange')
         this.props.navigation.goBack()
     }
     baseRef = (obj) => this.base = obj
@@ -482,7 +483,7 @@ class StockExchangeContainer extends PureComponent {
             <BaseContainer
                 currentScreen={'StockExchange'}
                 ref={this.baseRef}
-                onBackHandler={this.actionBack}
+                // onBackHandler={this.actionBack}
                 ownStyle={{
                     flex: 1,
                 }}

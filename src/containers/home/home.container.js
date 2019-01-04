@@ -271,13 +271,16 @@ class HomeContainer extends PureComponent {
         )
     }
 
+    actionBack = () => {
+        console.log('actionBack HomeDefault')
+        this.props.navigation.goBack()
+    }
     baseRef = (obj) => this.base = obj
     render() {
         return (
             <BaseContainer
                 currentScreen={'HomeDefault'}
                 ref={this.baseRef}
-                // onBackHandler={this.actionBack}
                 ownStyle={{
                     flex: 1,
                     backgroundColor: Colors.whiteTwo,

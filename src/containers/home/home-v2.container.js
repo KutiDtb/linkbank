@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     Animated,
     Dimensions,
-    Image
+    Image,
+    BackHandler
 } from 'react-native';
 import { connect } from 'react-redux'
 import BaseContainer from '../home/base.container'
@@ -22,6 +23,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Feather from 'react-native-vector-icons/Feather'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Toast, {DURATION} from 'react-native-easy-toast'
 
 class HomeV2Container extends PureComponent {
     constructor(props) {
@@ -38,6 +40,7 @@ class HomeV2Container extends PureComponent {
                 { id: 3, key: 'four', title: 'Tin nhắn' },
                 { id: 4, key: 'five', title: 'Tài khoản'},
             ],
+            countBack: 0,
         };
     }
 
@@ -130,12 +133,30 @@ class HomeV2Container extends PureComponent {
     }
 
     actionBack = () => {
-        this.props.navigation.goBack()
+        // console.log('actionBack HomeMenu')
+        if (this.state.countBack === 1) {
+            
+            if (this.timerHandle) {
+                clearTimeout(this.timerHandle)
+            }
+            BackHandler.exitApp()
+        } else {
+            this.refs.toast.show('Nhấn Back lần nữa để thoát App', 1000)
+            this.setState({
+                countBack: 1
+            })
+            this.timerHandle = setTimeout(() => {
+                this.setState({
+                    countBack: 0
+                })
+            }, 3000);
+        }
+        
     }
     render() {
         return (
             <BaseContainer
-                currentScreen={'Authen'}
+                currentScreen={'HomeMenu'}
                 onBackHandler={this.actionBack}
                 ownStyle={{
                     flex: 1,
@@ -152,6 +173,7 @@ class HomeV2Container extends PureComponent {
                     tabBarPosition={'bottom'}
                     lazy={true}
                 />
+                <Toast ref="toast"/>
             </BaseContainer>
         )
     }

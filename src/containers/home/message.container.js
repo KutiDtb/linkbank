@@ -19,13 +19,13 @@ class MessageContainer extends PureComponent {
     }
 
     actionBack = () => {
+        console.log('actionBack Message')
         this.props.navigation.goBack()
     }
     render() {
         return (
             <BaseContainer
                 currentScreen={'Message'}
-                onBackHandler={this.actionBack}
             >
                 <View style={{
                     flex: 1,

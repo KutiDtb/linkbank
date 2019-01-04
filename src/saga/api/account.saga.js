@@ -30,11 +30,13 @@ export function* processResponseAPI(response, finishRequest, requestName) {
 export function* registerCheckAccount(action) {
     // console.log('registerCheckAccount', JSON.stringify(action))
     var requestName = AccountTypes.REGISTER_CHECK_ACCOUNT;
+
     // if (action.phone === phone_V || action.phone === phone_Q) {
     //     yield put(AccountAction.finishRequest(true, '', {}, requestName))
     // } else {
     //     yield put(AccountAction.finishRequest(false, '', {}, requestName))
     // }
+
     var response = yield call(WalletApi.accountCheckPhone(action.phone, action.name).send)
     var result = yield processResponseAPI(response, AccountAction.finishRequest, requestName)
     console.log('registerCheckAccount', JSON.stringify(response))
@@ -44,11 +46,13 @@ export function* registerCheckAccount(action) {
 export function* registerSetPass(action) {
     // console.log('registerSetPass', JSON.stringify(action))
     var requestName = AccountTypes.REGISTER_SET_PASS;
+
     // if (action.pass === '123456') {
     //     yield put(AccountAction.finishRequest(true, '', {}, requestName))
     // } else {
     //     yield put(AccountAction.finishRequest(false, '', {}, requestName))
     // }
+
     var response = yield call(WalletApi.accountSetPass(action.phone, action.pass, action.name).send)
     var result = yield processResponseAPI(response, AccountAction.finishRequest, requestName)
     console.log('registerSetPass', JSON.stringify(response))
@@ -58,6 +62,7 @@ export function* registerSetPass(action) {
 export function* registerCheckOtp(action) {
     // console.log('registerCheckOtp', JSON.stringify(action))
     var requestName = AccountTypes.REGISTER_CHECK_OTP;
+
     // if (action.otp === '111111') {
     //     // yield Buz.saveStepRegister(action.phone, action.pass, action.name, credit, avatar, level, id)
     //     // yield put(AccountAction.finishRequest(true, '', {}, requestName))
@@ -70,13 +75,26 @@ export function* registerCheckOtp(action) {
     //     }
     //     yield Buz.saveStepRegister(action.phone, action.pass, action.name, data.credit, data.avatar, data.level, data.id)
     //     yield put(AccountAction.initDataFinishRequest(true, '', data, requestName))
-
     // } else {
     //     yield put(AccountAction.finishRequest(false, '', {}, requestName))
     // }
+
     var response = yield call(WalletApi.accountCheckOtp(action.phone, action.otp).send)
     var result = yield processResponseAPI(response, AccountAction.finishRequest, requestName)
     console.log('registerCheckOtp', JSON.stringify(response))
+    if (result.status) {
+        var data = {
+            name: action.name,
+            credit: 0,
+            avatar: Images.awatar.default,
+            level: 0,
+            id: '11223344',
+        }
+        yield Buz.saveStepRegister(action.phone, action.pass, action.name, data.credit, data.avatar, data.level, data.id)
+        yield put(AccountAction.initDataFinishRequest(true, '', data, requestName))
+        yield accountLoadProfile()
+        return
+    }
     yield put(result)
 }
 

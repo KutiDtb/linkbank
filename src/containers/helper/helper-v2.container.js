@@ -410,6 +410,7 @@ class HelperContainer extends PureComponent {
     }
 
     actionBack = () => {
+        console.log('actionBack Helper')
         this.props.navigation.goBack()
     }
     baseRef = (obj) => this.base = obj
@@ -418,7 +419,7 @@ class HelperContainer extends PureComponent {
             <BaseContainer
                 currentScreen={'Helper'}
                 ref={this.baseRef}
-                onBackHandler={this.actionBack}
+                // onBackHandler={this.actionBack}
                 ownStyle={{
                     flex: 1,
                     backgroundColor: Colors.whiteTwo

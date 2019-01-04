@@ -46,7 +46,7 @@ export default class BaseContainer extends PureComponent {
     }
 
     handleBackKey = () => {
-        console.log("Back handler on base", this.props.onBackHandler)
+        console.log("Back handler on base", this.props.currentScreen)
         this.props.onBackHandler()
         return true
     }

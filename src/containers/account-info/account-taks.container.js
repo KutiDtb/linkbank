@@ -42,9 +42,13 @@ class AccountTaksContainer extends PureComponent {
             switch (nextProps.currentRequestName) {
                 case AccountTypes.GET_INFO_TASK:
                     if (true === nextProps.apiStatus) {
+                        var taskFinish = nextProps.data.taskFinish
+                        if (null === taskFinish || taskFinish === undefined) {
+                            taskFinish = []
+                        }
                         this.setState({
                             percent: nextProps.data.percent,
-                            taskFinish: nextProps.data.taskFinish,
+                            taskFinish,
                         })
                     } else {
                         this.base.showErrorAlert(nextProps.error)
