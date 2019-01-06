@@ -1,11 +1,12 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 import config from '../config/config'
+import * as Buz from '../saga/buz/app-buz'
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
     finishRequest: ['status', 'error', 'data', 'requestName', 'nextScreen'],
-    getTicket: [],
+    getTicket: ['page'],
     getTicketCredit: ['id'],
     buyTicket: ['id', 'ticketType'],
     updateTicketStatus: ['id', 'list', 'status', 'content'],
@@ -31,7 +32,7 @@ export const actionFectching = (state) => {
 }
 export const finishRequest = (state, { status, error, data, requestName, nextScreen = undefined }) => {
     if (false === status) {
-        error = 'Co loi xay ra';
+        error = Buz.getMsgFromResp(data)
     }
     return state.merge({
         fetchStatus: config.FetchStatus.kFinishFetch,

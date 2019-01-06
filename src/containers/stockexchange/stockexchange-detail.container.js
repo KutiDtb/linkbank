@@ -74,7 +74,7 @@ class StockExchangeDetailContainer extends PureComponent {
     constructor(props) {
         super(props);
         this.data = this.props.navigation.getParam('data'),
-
+        console.log('constructor StockExchangeDetailContainer', JSON.stringify(this.data))
         this.state = {
             data: this.data,
             statusList: this.data.statusList,

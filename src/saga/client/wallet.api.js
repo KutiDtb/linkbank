@@ -166,9 +166,31 @@ const paymentCreateCreditCard = (loan_type, publisher, loan_range_min, loan_rang
     }
 }
 
+const applicationLoad = (page) => {
+    return {
+        send: () => client.get('loan/get?type=1&pageSize=15&page=' + page)
+    }
+}
+
+const applicationReceiveById = (applicationId) => {
+    let params = {
+        applicationId,
+    }
+    return {
+        send: () => client.post('loan/receive-application', params)
+    }
+}
+
+const applicationGetById = (applicationId) => {
+    return {
+        send: () => client.get('loan/get-by-id/' + applicationId)
+    }
+}
+
 export default {
     setHeaderToken,
     login, accountCheckPhone, accountSetPass, accountCheckOtp,
     accountInfoOne, accountLoadProfile, accountInfoTwo, accountInfoWork, accountInfoRelations, accountInfoAddPhones,
     paymentBuyCredit, paymentLoanRegister, paymentCreateCreditCard,
+    applicationLoad, applicationReceiveById, applicationGetById,
 }

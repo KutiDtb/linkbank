@@ -241,8 +241,8 @@ const config = {
     ],
     marryStatus: [
         // {key: 'Chọn', value: 'choose'},
-        {label: 'Độc thân', value: 'alone'},
-        {label: 'Lập gia đình', value: 'family'},
+        {label: 'Độc thân', value: 'Độc thân'},
+        {label: 'Lập gia đình', value: 'Lập gia đình'},
     ],
     education: [
         // {key: 'Chọn', value: 'choose'},

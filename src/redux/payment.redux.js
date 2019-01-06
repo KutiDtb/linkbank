@@ -36,7 +36,7 @@ export const actionFectching = (state) => {
 }
 export const finishRequest = (state, { status, error, data, requestName, nextScreen = undefined }) => {
     if (false === status) {
-        error = 'Co loi xay ra';
+        error = Buz.getMsgFromResp(data)
     }
     return state.merge({
         fetchStatus: config.FetchStatus.kFinishFetch,

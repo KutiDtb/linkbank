@@ -91,11 +91,13 @@ class StockExchangeContainer extends PureComponent {
             creditOne: 0,
             crdditFull: 0,
             creditCurrent: 0,
+
+            page: 1,
         }
     }
 
     componentDidMount() {
-        this.props.getTicket()
+        this.props.getTicket(this.state.page)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -106,6 +108,7 @@ class StockExchangeContainer extends PureComponent {
             this.props.fetchStatus !== nextProps.fetchStatus) {
             switch (nextProps.currentRequestName) {
                 case LoanTypes.GET_TICKET:
+                    this.base.loading(false)
                     if (true === nextProps.apiStatus) {
                         var dataTicket = this.state.dataTicket
                         var tickets = nextProps.data.tickets
@@ -114,7 +117,8 @@ class StockExchangeContainer extends PureComponent {
                         }
                         this.setState({
                             dataTicket,
-                            refreshing: true
+                            refreshing: true,
+                            page: this.state.page + 1,
                         })
                     } else {
                         this.base.showErrorAlert(nextProps.error)
@@ -136,6 +140,8 @@ class StockExchangeContainer extends PureComponent {
                     }
                     break;
                 case LoanTypes.BUY_TICKET:
+                    this.base.loading(false)
+                    // console.log('get tickets--BUY_TICKETreceive', nextProps.data)
                     if (true === nextProps.apiStatus) {
                         this.props.navigation.navigate(Screens.StockExchangeDetail, {
                             data: nextProps.data
@@ -151,7 +157,7 @@ class StockExchangeContainer extends PureComponent {
     }
 
     renderItemButtonBuy(id) {
-        if (this.account.level > 0) {
+        if (this.account.level >= 0) {
             return (
                 <TouchableOpacity style={{
                     flexDirection: 'row',
@@ -404,7 +410,7 @@ class StockExchangeContainer extends PureComponent {
                             paddingTop: scale(20),
                             flexDirection: 'row',
                         }}>
-                            <Text style={AppStyle.Paragraph_Left_Black}>{'Bạn đang có 180 Credit'}</Text>
+                            <Text style={AppStyle.Paragraph_Left_Black}>{'Bạn đang có '+ this.state.creditCurrent +' Credit'}</Text>
                             <TouchableOpacity>
                                 <Text style={AppStyle.Paragraph_Left_Red}>{' Nạp thêm Credit'}</Text>
                             </TouchableOpacity>
@@ -510,7 +516,9 @@ class StockExchangeContainer extends PureComponent {
                 <PureFlastList
                     data={this.state.dataTicket}
                     onEndReached={() => {
-                        this.props.getTicket()
+                        this.base.loading(true)
+                        this.props.getTicket(this.state.page)
+                        // alert('end')
                     }}
                     onEndReachedThreshold={0.5}
                     renderItem={this.renderItem}
@@ -598,11 +606,7 @@ class StockExchangeContainer extends PureComponent {
         this.setState({
             ticketId: id
         })
-        this.base.loading(true)
-        setTimeout(() => {
-            this.base.loading(false)
-            this.props.getTicketCredit(id)
-        }, 2000);
+        this.props.getTicketCredit(id)
         // this.props.getTicketCredit(id)
     }
 
@@ -610,8 +614,8 @@ class StockExchangeContainer extends PureComponent {
         this.setState({
             showModalTicket: false
         })
+        this.base.loading(true)
         this.props.buyTicket(this.state.ticketId)
-        // this.props.navigation.navigate(Screens.StockExchangeDetail)
     }
 
     actionHideModalBuyTicket = () => {
@@ -658,7 +662,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getTicket: () => dispatch(LoanAction.getTicket()),
+    getTicket: (page) => dispatch(LoanAction.getTicket(page)),
     getTicketCredit: (id) => dispatch(LoanAction.getTicketCredit(id)),
     buyTicket: (id) => dispatch(LoanAction.buyTicket(id)),
 })

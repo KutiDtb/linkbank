@@ -29,3 +29,7 @@ export function checkValidString(value) {
     }
     return true
 }
+
+export function formatAmmount(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
