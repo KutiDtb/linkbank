@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'linkbank' do
   rn_maps_path = '../node_modules/react-native-maps'
@@ -19,10 +19,13 @@ target 'linkbank' do
 
   pod 'react-native-google-maps', path: rn_maps_path  # Unomment this line if you want to support GoogleMaps on iOS
   pod 'GoogleMaps'  # Uncomment this line if you want to support GoogleMaps on iOS
-  pod 'Google-Maps-iOS-Utils' # Uncomment this line if you want to support GoogleMaps on iOS
+  # pod 'Google-Maps-iOS-Utils' # Uncomment this line if you want to support GoogleMaps on iOS
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
   pod 'RNShare', :path => '../node_modules/react-native-share'
+
+  pod 'Firebase/Core'
+  pod 'Firebase/DynamicLinks'
 
 end
 

@@ -113,14 +113,14 @@ class HelperMapContainer extends PureComponent {
                         longitudeDelta: 0.01,
                     }}
                 >
-                    {this.state.markers.map(marker => (
+                    {/* {this.state.markers.map(marker => (
                         <Marker
                             key={marker.key}
                             coordinate={marker.latlng}
                             title={marker.title}
                             description={marker.description}
                         />
-                    ))}
+                    ))} */}
 
                 </MapView >
             </BaseContainer >

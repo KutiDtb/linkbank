@@ -11,6 +11,8 @@
 #import <React/RCTRootView.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import "RNSplashScreen.h"
+#import <Firebase.h>
+#import "RNFirebaseLinks.h"
 
 @implementation AppDelegate
 
@@ -33,7 +35,21 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [RNSplashScreen show];
+  [FIROptions defaultOptions].deepLinkURLScheme = @"linkbankvn.page.link";
+  [FIRApp configure];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<NSString *, id> *)options {
+  return [[RNFirebaseLinks instance] application:application openURL:url options:options];
+}
+
+- (BOOL)application:(UIApplication *)application
+continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray *))restorationHandler {
+  return [[RNFirebaseLinks instance] application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
 
 @end

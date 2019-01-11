@@ -16,6 +16,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AccountAction, { AccountTypes } from '../../redux/account.redux'
 import * as Buz from '../../saga/buz/app-buz'
+import firebase from 'react-native-firebase'
 
 class HomeContainer extends PureComponent {
     constructor(props) {
@@ -315,7 +316,18 @@ class HomeContainer extends PureComponent {
     }
 
     actionNotify = () => {
-        // this.props.navigation.navigate(Screens.NotifyDetail)
+        firebase.links()
+            .getInitialLink()
+            .then((url) => {
+                console.log('getInitialLink-notify', url)
+                // if (url) {
+                //     // Alert.alert("Open from referral")
+                //     //Notify to server
+                //     // this.props.referralNotify('https://test-referral.paysmart.com.vn/v1.0/createDynamicLink?referralCode=SMARTPAY2z7oox8j2');
+                // } else {
+                //     // Alert.alert('Error get referral link')
+                // }
+            })
     }
 
     actionFunction = (key) => {

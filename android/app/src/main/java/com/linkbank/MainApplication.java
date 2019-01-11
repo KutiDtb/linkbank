@@ -3,6 +3,7 @@ package com.linkbank;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -16,6 +17,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import io.invertase.firebase.links.RNFirebaseLinksPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +35,7 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNFirebasePackage(),
             new RNSharePackage(),
             new SplashScreenReactPackage(),
             new MapsPackage(),
@@ -39,7 +43,9 @@ public class MainApplication extends Application implements ShareApplication, Re
             new ImagePickerPackage(),
             new LinearGradientPackage(),
             new RNI18nPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new RNFirebaseLinksPackage(),
+            new RNFirebaseMessagingPackage()
       );
     }
 

@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "459280860467",
+    "firebase_url": "https://my-project-1529143038211.firebaseio.com",
+    "project_id": "my-project-1529143038211",
+    "storage_bucket": "my-project-1529143038211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459280860467:android:c7e9ce304740b8eb",
+        "android_client_info": {
+          "package_name": "com.linkbank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459280860467-uc9fo9pb5mpvphoclk9rdad7bc0mkisg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linkbank",
+            "certificate_hash": "954aa38dce358fdac60ea3363e18cbb6a9f31352"
+          }
+        },
+        {
+          "client_id": "459280860467-3nk7fbbna1g3p3teoe90cgnbs339736d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj6Cuh5JpWFta7JcF-Yam7hhN--7IozYo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459280860467-3nk7fbbna1g3p3teoe90cgnbs339736d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "459280860467-e0nj8k6odhpl3aq1dj87l53elll1no4d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.linkbank",
+                "app_store_id": "12345678"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
